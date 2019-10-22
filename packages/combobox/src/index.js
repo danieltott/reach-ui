@@ -262,7 +262,7 @@ export const Combobox = forwardRef(function Combobox(
 
   useFocusManagement(data.lastActionType, inputRef);
 
-  const listboxId = `listbox--${useId()}`;
+  const listboxId = useId("listbox");
 
   const context = useMemo(() => {
     return {

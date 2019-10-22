@@ -81,7 +81,7 @@ export const Slider = forwardRef(function Slider(
     "Slider is changing from uncontrolled to controlled. Slider should not switch from uncontrolled to controlled (or vice versa). Decide between using a controlled or uncontrolled Slider for the lifetime of the component. Check the `value` prop being passed in."
   );
 
-  const _id = makeId("slider", useId());
+  const _id = useId("slider");
 
   const trackRef = useRef(null);
   const handleRef = useRef(null);
@@ -222,6 +222,7 @@ export const Slider = forwardRef(function Slider(
   const valueText = getValueText ? getValueText(actualValue) : ariaValueText;
 
   const sliderId = id || _id;
+  const inputId = useId("sliderinput");
 
   const trackHighlightStyle = isVertical
     ? {
@@ -259,7 +260,8 @@ export const Slider = forwardRef(function Slider(
     trackPercent,
     trackRef,
     trackHighlightStyle,
-    updateValue
+    updateValue,
+    inputId
   };
 
   const dataAttributes = makeDataAttributes("slider", {
@@ -317,12 +319,7 @@ export const Slider = forwardRef(function Slider(
           // If the slider is used in a form we'll need an input field to capture the value.
           // We'll assume this when the component is given a form field name
           // (A `name` prop doesn't really make sense in any other context)
-          <input
-            type="hidden"
-            value={actualValue}
-            name={name}
-            id={makeId("input", sliderId)}
-          />
+          <input type="hidden" value={actualValue} name={name} id={inputId} />
         )}
       </div>
     </SliderContext.Provider>
@@ -572,10 +569,6 @@ export function makeDataAttributes(
     [`data-reach-${component}-orientation`]: orientation,
     [`data-reach-${component}-highlight`]: highlight ? orientation : undefined
   };
-}
-
-export function makeId(id, index) {
-  return `${id}--${index}`;
 }
 
 export function useDimensions(passedRef) {

@@ -7,7 +7,7 @@ import React, {
 } from "react";
 import { node, func, number } from "prop-types";
 import warning from "warning";
-import { wrapEvent } from "@reach/utils";
+import { wrapEvent, makeId } from "@reach/utils";
 import { useId } from "@reach/auto-id";
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -298,5 +298,3 @@ function useUpdateEffect(effect, deps) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, deps);
 }
-
-const makeId = (id, index) => `${id}--${index}`;

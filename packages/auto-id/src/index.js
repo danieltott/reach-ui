@@ -1,9 +1,10 @@
 // https://github.com/thearnica/react-uid/blob/master/src/hooks.ts
 import { createContext, useContext, useState } from "react";
+import { makeId } from "@reach/utils";
 
-export const useId = () => {
+export const useId = label => {
   const [{ id }] = useIDState();
-  return id;
+  return typeof label === "string" ? makeId(label, id) : id;
 };
 
 const counter = createSource();
